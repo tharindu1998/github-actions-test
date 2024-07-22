@@ -34,7 +34,7 @@ jobs:
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          image: docker.io/tharindufdo/github-actions-test  # Ensure this format is correct
+          image: tharindufdo/github-actions-test  # Ensure this format is correct
           tags: latest
           registry: docker.io
           dockerfile: ./Dockerfile  # Ensure this path is correct
