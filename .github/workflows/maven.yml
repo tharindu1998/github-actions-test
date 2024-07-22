@@ -37,7 +37,7 @@ jobs:
           image: tharindufdo/github-actions-test  # Ensure this format is correct
           tags: latest
           registry: docker.io
-          dockerfile: ./Dockerfile  # Ensure this path is correct
+          dockerfile: Dockerfile  # Ensure this path is correct
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
