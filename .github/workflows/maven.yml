@@ -41,7 +41,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull docker.io/tharindufdo/github-actions-test:latest
+#            docker stop github-actions-test || true
+#            docker rm github-actions-test || true
+#            docker run -d --name github-actions-test -p 9090:9090 docker.io/tharindufdo/github-actions-test:latest
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #    - name: Update dependency graph
