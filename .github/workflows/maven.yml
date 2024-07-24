@@ -41,12 +41,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Check SSH Authentication
+      - name: Start SSH agent and add key
         run: |
-          echo "$SSH_PRIVATE_KEY" | ssh-add -
-          ssh -v root@${{ secrets.SSH_HOST }} exit
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          eval "$(ssh-agent -s)"
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
