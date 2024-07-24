@@ -42,6 +42,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Start SSH agent and add key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           eval "$(ssh-agent -s)"
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
