@@ -49,6 +49,8 @@ jobs:
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          ssh-add -l # List added keys to verify
+          ssh -v ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful'" # Test SSH connection
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
