@@ -1,3 +1,7 @@
-FROM openjdk:17
-ADD target/github-actions-test.jar github-actions-test.jar
-ENTRYPOINT ["java", "-jar", "github-actions-test.jar"]
+FROM openjdk:8-jdk-alpine
+RUN apk add curl
+VOLUME /tmp
+EXPOSE 8080
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
